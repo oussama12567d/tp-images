@@ -1,6 +1,7 @@
 from typing import Union
 from fastapi import FastAPI, File, UploadFile
 from fastapi.responses import FileResponse
+import uvicorn
 import function as func
 from fastapi.middleware.cors import CORSMiddleware
 
@@ -79,5 +80,6 @@ async def scale_image(scale_x: float, scale_y: float):
 
 
 if __name__ == "__main__":
-    import uvicorn
-    uvicorn.run(app)
+    config = uvicorn.Config("main:app",host="0.0.0.0", port=10000, log_level="info")
+    server = uvicorn.Server(config)
+    server.run()
