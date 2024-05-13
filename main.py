@@ -5,6 +5,7 @@ import files_endpoint
 import chapter1_endpoint
 import chapter3_endpoint
 import chapter4_endpoint
+import chapter5_endpoint
 
 app = FastAPI()
 
@@ -22,6 +23,7 @@ app.include_router(files_endpoint.router)
 app.include_router(chapter1_endpoint.router)
 app.include_router(chapter3_endpoint.router)
 app.include_router(chapter4_endpoint.router)
+app.include_router(chapter5_endpoint.router)
 
 
 @app.get("/")

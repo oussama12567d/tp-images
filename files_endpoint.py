@@ -11,22 +11,22 @@ router = APIRouter(
 )
 
 
-@router.post("/upload_files/", status_code=201)
-async def upload_files(files: List[UploadFile] = File(...)):
-    try:
-        i = 0
-        data: dict = {}
-        for file in files:
-            file.filename = f"input{i}.jpg"
-            contents = await file.read()
-            with open(f"images/input{i}.jpg", "wb") as f:
-                f.write(contents)
-            data.update({file.filename: "success"})
-            i += 1
-        return data
-    except Exception as e:
-        print(f"An error occurred: {e}")
-        return {"error": "An error occurred while processing the file."}
+# @router.post("/upload_files/", status_code=201)
+# async def upload_files(files: List[UploadFile] = File(...)):
+#     try:
+#         i = 0
+#         data: dict = {}
+#         for file in files:
+#             file.filename = f"input{i}.jpg"
+#             contents = await file.read()
+#             with open(f"images/input{i}.jpg", "wb") as f:
+#                 f.write(contents)
+#             data.update({file.filename: "success"})
+#             i += 1
+#         return data
+#     except Exception as e:
+#         print(f"An error occurred: {e}")
+#         return {"error": "An error occurred while processing the file."}
 
 
 @router.post("/upload/", status_code=201)
