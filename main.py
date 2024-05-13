@@ -4,6 +4,7 @@ from fastapi.middleware.cors import CORSMiddleware
 import files_endpoint
 import chapter1_endpoint
 import chapter3_endpoint
+import chapter4_endpoint
 
 app = FastAPI()
 
@@ -20,6 +21,7 @@ app.add_middleware(
 app.include_router(files_endpoint.router)
 app.include_router(chapter1_endpoint.router)
 app.include_router(chapter3_endpoint.router)
+app.include_router(chapter4_endpoint.router)
 
 
 @app.get("/")
