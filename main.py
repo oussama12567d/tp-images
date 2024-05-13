@@ -1,4 +1,4 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
 import uvicorn
 from fastapi.middleware.cors import CORSMiddleware
 import files_endpoint
@@ -24,6 +24,13 @@ app.include_router(chapter1_endpoint.router)
 def read_root():
     return {"Hello": "World"}
 
+# Using Request instance
+@app.get("/url-list-from-request")
+def get_all_urls_from_request(request: Request):
+    url_list = [
+        {"path": route.path, "name": route.name} for route in request.app.routes
+    ]
+    return url_list
 
 
 if __name__ == "__main__":

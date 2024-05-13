@@ -1,6 +1,3 @@
-
-
-
 from fastapi import APIRouter
 import functions.function1 as func
 
