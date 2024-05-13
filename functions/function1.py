@@ -23,7 +23,7 @@ def rotate_image(image_path, angle):
 
 def scale_image(image_path, scale_x, scale_y):
     # Read the image
-    image = cv2.imread(image_path)
+    image = cv2.imread(image_path, cv2.IMREAD_GRAYSCALE)
     # Compute the scaling matrix
     scaling_matrix = np.float32([[scale_x, 0, 0],
                                   [0, scale_y, 0]])
