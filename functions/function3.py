@@ -92,29 +92,10 @@ def histogram_equalization(image_path):
     mapped_image = np.interp(image.flatten(), range(256), cdf_normalized).reshape(image.shape)
     # Convert the result to 8-bit unsigned integers
     mapped_image = (mapped_image * 255).astype(np.uint8)
-    return mapped_image
-
-# Example usage
-if __name__ == "__main__":
-    image_path = 'th.jpg'
-    mapped_image = histogram_equalization(image_path)
-    # Display the original image and the mapped image
-    plt.figure(figsize=(10, 5))
-    plt.subplot(1, 2, 1)
-    plt.imshow(cv2.imread(image_path, cv2.IMREAD_GRAYSCALE), cmap='gray')
-    plt.title('Original Image')
-    plt.axis('off')
-    plt.subplot(1, 2, 2)
-    plt.imshow(mapped_image, cmap='gray')
-    plt.title('Mapped Image')
-    plt.axis('off')
-    plt.show()
+    cv2.imwrite('images/output.jpg', mapped_image)
+    return
 
 
-
-import cv2
-import matplotlib.pyplot as plt
-import numpy as np
 
 def equalized_image(image_path):
     # Read the image
@@ -129,22 +110,16 @@ def equalized_image(image_path):
     equalized_image = np.interp(image.flatten(), range(256), cdf_normalized).reshape(image.shape)
     # Convert the result to 8-bit unsigned integers
     equalized_image = (equalized_image * 255).astype(np.uint8)
-    return equalized_image
-
-# Example usage
-if __name__ == "__main__":
-    image_path = 'th.jpg'
-    equalized_image = equalized_image(image_path)
-    # Display the original image and the equalized image
-    plt.figure(figsize=(10, 5))
-    plt.subplot(1, 2, 1)
-    plt.imshow(cv2.imread(image_path, cv2.IMREAD_GRAYSCALE), cmap='gray')
-    plt.title('Original Image')
-    plt.axis('off')
-    plt.subplot(1, 2, 2)
-    plt.imshow(equalized_image, cmap='gray')
-    plt.title('Equalized Image')
-    plt.axis('off')
-    plt.show()
+    cv2.imwrite('images/output.jpg', equalized_image)
+    return
 
 
+
+def apply_gaussian_blur(image_path, value = 5):
+    kernel_size = (value, value)
+    # Read the image
+    image = cv2.imread(image_path)
+    # Apply Gaussian blur
+    blurred_image = cv2.GaussianBlur(image, kernel_size, 0)
+    cv2.imwrite('images/output.jpg', blurred_image)
+    return

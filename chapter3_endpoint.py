@@ -77,3 +77,23 @@ async def histogram_equalization():
     except Exception as e:
         print(f"An error occurred: {e}")
         return {"error": "An error occurred while processing the file."}
+
+
+@router.post("/map_pixel_intensities/contrast_stretching", status_code=201)
+async def contrast_stretching():
+    try:
+        func.contrast_stretching("images/input.jpg")
+        return {"filename": "output.jpg", "status": "success"}
+    except Exception as e:
+        print(f"An error occurred: {e}")
+        return {"error": "An error occurred while processing the file."}
+
+
+@router.post("/transformer_de_fourier/apply_gaussian_blur", status_code=201)
+async def apply_gaussian_blur(kernel_size: int = 5):
+    try:
+        func.apply_gaussian_blur("images/input.jpg", kernel_size)
+        return {"filename": "output.jpg", "status": "success"}
+    except Exception as e:
+        print(f"An error occurred: {e}")
+        return {"error": "An error occurred while processing the file."}
