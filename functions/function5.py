@@ -4,7 +4,6 @@ from skimage.segmentation import active_contour
 from skimage.segmentation import random_walker
 
 
-
 def detect_and_draw_contours(image_path):
     # Load the image
     image = cv2.imread(image_path)
@@ -25,14 +24,12 @@ def detect_and_draw_contours(image_path):
     # Draw contours on the original image
     image_with_contours = np.copy(image)
     cv2.drawContours(image_with_contours, contours, -1, (0, 255, 0), 2)
-
     cv2.imwrite('images/output.jpg', image_with_contours)
     return
 
 
-
 def segment_active_contour(image_path):
-    image = cv2.imread(image_path, cv2.IMREAD_GRAYSCALE)
+    image = cv2.imread(image_path)
     # Convert to grayscale if necessary
     if image.ndim == 3:
         image_gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
@@ -45,14 +42,16 @@ def segment_active_contour(image_path):
 
     # Perform active contour (snakes) segmentation
     snake = active_contour(image_gray, init, alpha=0.015, beta=10, gamma=0.001)
-
     cv2.imwrite('images/output.jpg', snake)
     return
 
 
-
-def segment_random_walker(image_path, seeds):
-    image = cv2.imread(image_path, cv2.IMREAD_GRAYSCALE)
+def segment_random_walker(image_path):
+    image = cv2.imread(image_path)
+    # Choose seed points for the region growing
+    seeds = np.zeros(image.shape, dtype=np.uint8)
+    seeds[50, 50] = 1  # Object seed point
+    seeds[100, 100] = 2  # Background seed point
     # Perform region growing using random walker algorithm
     labels = random_walker(image, seeds, mode='bf', beta=10)
     cv2.imwrite('images/output.jpg', labels)
@@ -91,3 +90,4 @@ def detect_and_draw_circles(image_path):
 
     cv2.imwrite('images/output.jpg', image_with_circles)
     return
+

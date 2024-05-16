@@ -10,9 +10,9 @@ router = APIRouter(
 
 
 @router.post("/segmentation/detect_and_draw_contours", status_code=201)
-async def detect_and_draw_contours(image_path: str):
+async def detect_and_draw_contours():
     try:
-        func.detect_and_draw_contours(image_path)
+        func.detect_and_draw_contours("images/input.jpg")
         return {"filename": "output.jpg", "status": "success"}
     except Exception as e:
         print(f"An error occurred: {e}")
@@ -20,9 +20,9 @@ async def detect_and_draw_contours(image_path: str):
 
 
 @router.post("/segmentation/segment_active_contour", status_code=201)
-async def segment_active_contour(image_path: str):
+async def segment_active_contour():
     try:
-        func.segment_active_contour(image_path)
+        func.segment_active_contour("images/input.jpg")
         return {"filename": "output.jpg", "status": "success"}
     except Exception as e:
         print(f"An error occurred: {e}")
@@ -30,9 +30,9 @@ async def segment_active_contour(image_path: str):
 
 
 @router.post("/segmentation/segment_random_walker", status_code=201)
-async def segment_random_walker(image_path: str, seeds: list):
+async def segment_random_walker():
     try:
-        func.segment_random_walker(image_path, seeds)
+        func.segment_random_walker("images/input.jpg")
         return {"filename": "output.jpg", "status": "success"}
     except Exception as e:
         print(f"An error occurred: {e}")
@@ -40,9 +40,9 @@ async def segment_random_walker(image_path: str, seeds: list):
 
 
 @router.post("/segmentation/detect_and_draw_circles", status_code=201)
-async def detect_and_draw_circles(image_path: str):
+async def detect_and_draw_circles():
     try:
-        func.detect_and_draw_circles(image_path)
+        func.detect_and_draw_circles("images/input.jpg")
         return {"filename": "output.jpg", "status": "success"}
     except Exception as e:
         print(f"An error occurred: {e}")
